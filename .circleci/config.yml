@@ -86,10 +86,14 @@ jobs:
   release:
     docker:
       - image: circleci/golang:1.14
+    environment:
+      CIRCLE_TAG: '{{ .Environment.CIRCLE_TAG }}'
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - run: |
-          make release-publish
-          ./scripts/brew-formula.sh
+      - run:
+          name: 'Release the goods'
+          command: |
+            make release-publish
+            ./scripts/brew-formula.sh
