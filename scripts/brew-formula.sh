@@ -7,11 +7,15 @@ set -o errexit
 # Use the error status of the first failure, rather than that of the last item in a pipeline.
 set -o pipefail
 
-openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz
+echo $PWD
 
-sha256_result=$(openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz)
+ls -la $PWD
+
+# openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz
+
+# sha256_result=$(openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz)
 
 printf "\n"
-echo "SHA result: ${sha256_result}"
+# echo "SHA result: ${sha256_result}"
 
 printf "\n"
