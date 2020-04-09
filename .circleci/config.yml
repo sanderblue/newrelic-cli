@@ -7,34 +7,24 @@ workflows:
   integration:
     jobs:
       - checkout_code
-      - lint:
-          requires:
-            - checkout_code
-      - test:
-          requires:
-            - checkout_code
-      - security-scan:
-          requires:
-            - checkout_code
+      # - lint:
+      #     requires:
+      #       - checkout_code
+      # - test:
+      #     requires:
+      #       - checkout_code
+      # - security-scan:
+      #     requires:
+      #       - checkout_code
       - compile:
           requires:
-            - lint
-            - test
-            - security-scan
-      - hold-for-release:
-          type: approval
-          filters:
-            branches:
-              only: master
-          require:
-            - compile
+            - checkout_code
+            # - lint
+            # - test
+            # - security-scan
       - release:
-          filters:
-            branches:
-              only: master
           requires:
             - compile
-            - hold-for-release
 
 jobs:
   checkout_code:
@@ -48,39 +38,39 @@ jobs:
           paths:
             - ~/project
 
-  lint:
-    docker:
-      - image: circleci/golang:1.14
-    steps:
-      - restore_cache:
-          key: repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Lint
-          command: make lint
+  # lint:
+  #   docker:
+  #     - image: circleci/golang:1.14
+  #   steps:
+  #     - restore_cache:
+  #         key: repo-{{ .Environment.CIRCLE_SHA1 }}
+  #     - run:
+  #         name: Lint
+  #         command: make lint
 
-  test:
-    docker:
-      - image: circleci/golang:1.14
-    steps:
-      - restore_cache:
-          key: repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Unit Tests
-          command: make test-unit
-      - run:
-          name: Integration Tests
-          command: make test-integration
+  # test:
+  #   docker:
+  #     - image: circleci/golang:1.14
+  #   steps:
+  #     - restore_cache:
+  #         key: repo-{{ .Environment.CIRCLE_SHA1 }}
+  #     - run:
+  #         name: Unit Tests
+  #         command: make test-unit
+  #     - run:
+  #         name: Integration Tests
+  #         command: make test-integration
 
-  security-scan:
-    docker:
-      - image: circleci/golang:1.14
-    steps:
-      - restore_cache:
-          key: repo-{{ .Environment.CIRCLE_SHA1 }}
-      - snyk/scan:
-          severity-threshold: high
-          fail-on-issues: false
-          monitor-on-build: true
+  # security-scan:
+  #   docker:
+  #     - image: circleci/golang:1.14
+  #   steps:
+  #     - restore_cache:
+  #         key: repo-{{ .Environment.CIRCLE_SHA1 }}
+  #     - snyk/scan:
+  #         severity-threshold: high
+  #         fail-on-issues: false
+  #         monitor-on-build: true
 
   compile:
     docker:
