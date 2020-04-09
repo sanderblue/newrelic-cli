@@ -9,7 +9,7 @@ set -o pipefail
 
 echo $PWD
 
-ls -la $PWD
+ls -la $PWD/dist
 
 # openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz
 
