@@ -25,17 +25,19 @@ workflows:
           type: approval
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
+              # ignore: /.*/
+              only: feat/homebrew-automation-enhancements
+            # tags:
+            #   only: /^v\d+\.\d+\.\d+$/
           require:
             - compile
       - release:
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
+              # ignore: /.*/
+              only: feat/homebrew-automation-enhancements
+            # tags:
+            #   only: /^v\d+\.\d+\.\d+$/
           requires:
             - compile
             - hold-for-release
@@ -102,4 +104,3 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: make release-publish
-

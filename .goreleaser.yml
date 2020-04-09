@@ -9,8 +9,7 @@ before:
     - go mod download
 
 builds:
-  -
-    id: newrelic
+  - id: newrelic
     dir: cmd/newrelic
     binary: newrelic
     env:
@@ -23,16 +22,15 @@ builds:
       - amd64
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.appName={{.Binary}}
-        -X github.com/newrelic/newrelic-cli/internal/client.version={{.Version}}
+        -X github.com/sanderblue/newrelic-cli/internal/client.version={{.Version}}
 
 release:
   # Mark as a pre-release for now
   prerelease: true
-  name_template: "{{.ProjectName}} v{{.Version}}"
+  name_template: '{{.ProjectName}} v{{.Version}}'
 
 archives:
-  -
-    id: "default"
+  - id: 'default'
     builds:
       - newrelic
     replacements:
@@ -49,20 +47,19 @@ archives:
       - LICENSE
       - README.md
 
-dockers:
-  -
-    dockerfile: build/package/Dockerfile
-    image_templates:
-      - 'newrelic/cli:{{ .Tag }}'
-      - 'newrelic/cli:v{{ .Major }}.{{ .Minor }}'
-      - 'newrelic/cli:latest'
-    binaries:
-      - newrelic
-    build_flag_templates:
-      - "--pull"
-      - "--label=repository=http://github.com/newrelic/newrelic-cli"
-      - "--label=homepage=https://developer.newrelic.com/"
-      - "--label=maintainer=Developer Toolkit <opensource@newrelic.com>"
+# dockers:
+#   - dockerfile: build/package/Dockerfile
+#     image_templates:
+#       - 'newrelic/cli:{{ .Tag }}'
+#       - 'newrelic/cli:v{{ .Major }}.{{ .Minor }}'
+#       - 'newrelic/cli:latest'
+#     binaries:
+#       - newrelic
+#     build_flag_templates:
+#       - '--pull'
+#       - '--label=repository=http://github.com/newrelic/newrelic-cli'
+#       - '--label=homepage=https://developer.newrelic.com/'
+#       - '--label=maintainer=Developer Toolkit <opensource@newrelic.com>'
 
 # Already using git-chglog
 changelog:
