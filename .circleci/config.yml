@@ -25,19 +25,13 @@ workflows:
           type: approval
           filters:
             branches:
-              # ignore: /.*/
-              only: feat/homebrew-automation-enhancements
-            # tags:
-            #   only: /^v\d+\.\d+\.\d+$/
+              only: master
           require:
             - compile
       - release:
           filters:
             branches:
-              # ignore: /.*/
-              only: feat/homebrew-automation-enhancements
-            # tags:
-            #   only: /^v\d+\.\d+\.\d+$/
+              only: master
           requires:
             - compile
             - hold-for-release
