@@ -7,11 +7,11 @@ class Newrelic < Formula
 
   if OS.mac?
     url "https://github.com/newrelic/newrelic-cli/releases/download/v0.6.2-test/newrelic-cli_0.6.2-test_Darwin_x86_64.tar.gz"
-    sha256 "8d6366352813fc94f7e5eb02555a146d1fe3027a961ae7d7a5ed75ea6204c76d"
+    sha256 "2a5fb769acfcba93a2e6ea7d03fe909b5f56547b1e0d6a28f1dd5a63c51a9fff"
   elsif OS.linux?
     if Hardware::CPU.intel?
       url "https://github.com/newrelic/newrelic-cli/releases/download/v0.6.2-test/newrelic-cli_0.6.2-test_Linux_x86_64.tar.gz"
-      sha256 "c73f5f8969f8364a1d59c4b67b5474417af934fd0276a873091092f416235e6f"
+      sha256 "b1b3ad22cd9df53b04b582c07871f316f6e89c7ccfc3e7c9cdac9ec69b6d0e2b"
     end
   end
   
@@ -19,7 +19,14 @@ class Newrelic < Formula
   sha256 "603bf5b23e8f986085596b0728503eaa46d41cb31d1c3ac9f1988ac7d48219ec"
   head "https://github.com/newrelic/newrelic-cli.git"
   
-  depends_on "go"
+  bottle do
+    cellar :any_skip_relocation
+    sha256 "8cec5f941f4debc4ee6aeb677a958aea0bb767779f15cabb5dd36644151353b5" => :catalina
+    sha256 "d0190fc7cfb04544eb7e05125e4888b6226183f4777d5923b3afa45ca8803dfc" => :mojave
+    sha256 "147be967461677898528c16b3561b30e1c5803d8cdddea47bbe9af8d6e667933" => :high_sierra
+  end
+  
+  depends_on "go => :build"
 
   def install
     ENV["PROJECT_VER"] = version
