@@ -22,21 +22,31 @@ asset_linux="${PWD}/dist/newrelic-cli_${GIT_TAG}_Linux_x86_64.tar.gz"
 asset_windows="${PWD}/dist/newrelic-cli_${GIT_TAG}_Windows_x86_64.zip"
 asset_formula="${PWD}/dist/newrelic.rb"
 
-printf "\n"
+printf "\n\n"
+
+which envsubst
+
+printf "\n\n"
+
 echo ${asset_darwin}
 echo ${asset_linux}
 echo ${asset_windows}
 printf "\n"
 
-sha256_darwin=$(openssl sha256 < $asset_darwin)
-sha256_linux=$(openssl sha256 < $asset_linux)
-sha256_windows=$(openssl sha256 < $asset_windows)
+export SHA256_DARWIN=$(openssl sha256 < $asset_darwin)
+export SHA256_LINUX=$(openssl sha256 < $asset_linux)
+export SHA256_WINDOWS=$(openssl sha256 < $asset_windows)
 
-echo "sha256_darwin:  ${sha256_darwin}"
-echo "sha256_linux:   ${sha256_linux}"
-echo "sha256_windows: ${sha256_windows}"
+echo "sha256_darwin:  ${SHA256_DARWIN}"
+echo "sha256_linux:   ${SHA256_LINUX}"
+echo "sha256_windows: ${SHA256_WINDOWS}"
+
+printf "\n\n"
 
 cat $asset_formula
 
+envsubst < ${PWD}/scripts/newrelic.rb.tmpl > ${PWD}/dist/newrelic-formula.rb
+
+cat ${PWD}/dist/newrelic-formula.rb
 
 printf "\n"
