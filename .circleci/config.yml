@@ -86,15 +86,10 @@ jobs:
   release:
     docker:
       - image: circleci/golang:1.14
-    # environment:
-    #   TAG: $CIRCLE_TAG
     steps:
       - checkout
       # - setup_remote_docker:
       #     docker_layer_caching: true
-      # - run:
-      #     name: 'Setup custom environment variables 1'
-      #     command: echo 'export GIT_TAG=${'${CIRCLE_TAG}'}' >> $BASH_ENV
       - run:
           name: 'Setup custom environment variables 1'
           command: |
