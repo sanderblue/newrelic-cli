@@ -17,16 +17,22 @@ printf "\n"
 
 ls -la $PWD/dist
 
-asset_path="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
+asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
+asset_linux="${PWD}/dist/newrelic-cli_${GIT_TAG}_Linux_x86_64.tar.gz"
+asset_windows="${PWD}/dist/newrelic-cli_${GIT_TAG}_Windows_x86_64.zip"
 
 printf "\n"
-echo ${asset_path}
+echo ${asset_darwin}
+echo ${asset_linux}
+echo ${asset_windows}
 printf "\n"
 
-# openssl sha256 < ${asset_path}
+sha256_darwin=$(openssl sha256 < $asset_darwin)
+sha256_linux=$(openssl sha256 < $asset_linux)
+sha256_windows=$(openssl sha256 < $asset_windows)
 
-# sha256_result=$(openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz)
-
-# echo "SHA result: ${sha256_result}"
+echo "sha256_darwin:  ${sha256_darwin}"
+echo "sha256_linux:   ${sha256_linux}"
+echo "sha256_windows: ${sha256_windows}"
 
 printf "\n"
