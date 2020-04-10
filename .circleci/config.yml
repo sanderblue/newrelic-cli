@@ -101,9 +101,10 @@ jobs:
       - run:
           name: 'What TAG am I on now?'
           command: |
+            echo $BASH_ENV
             echo $TAG_TEST_1
             echo $TAG_TEST_2
             echo $CIRCLE_TAG
       - run:
           name: 'Release the goods'
-          command: export TAG=${CIRCLE_TAG} ./scripts/brew-formula.sh
+          command: ./scripts/brew-formula.sh
