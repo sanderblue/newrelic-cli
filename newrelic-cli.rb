@@ -1,0 +1,27 @@
+class NewrelicCli < Formula
+  desc "The New Relic Command-line Interface"
+  homepage "https://github.com/newrelic/newrelic-cli"
+  url "https://github.com/newrelic/newrelic-cli/archive/v1.0.0.tar.gz"
+  sha256 "123456789"
+  head "https://github.com/newrelic/newrelic-cli.git"
+
+  depends_on "go" => :build
+
+  def install
+    ENV["PROJECT_VER"] = version
+    system "make", "compile-only"
+    bin.install "bin/darwin/newrelic"
+
+    output = Utils.popen_read("#{bin}/newrelic completion --shell bash")
+    (bash_completion/"newrelic").write output
+    output = Utils.popen_read("#{bin}/newrelic completion --shell zsh")
+    (zsh_completion/"_newrelic").write output
+  end
+
+  test do
+    assert_match /pluginDir/, shell_output("#{bin}/newrelic config list")
+    assert_match /logLevel/, shell_output("#{bin}/newrelic config list")
+    assert_match /sendUsageData/, shell_output("#{bin}/newrelic config list")
+    assert_match version.to_s, shell_output("#{bin}/newrelic version 2>&1")
+  end
+end
