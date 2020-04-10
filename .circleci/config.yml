@@ -104,5 +104,5 @@ jobs:
           name: 'What TAG am I on now?'
           command: |
             echo "Creating Homebrew formula for tag ${GIT_TAG}..."
-
+            make release-publish
             ./scripts/brew-formula.sh
