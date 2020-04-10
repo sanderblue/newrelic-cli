@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit script if you try to use an uninitialized variable.
-# set -o nounset
+set -o nounset
 
 # Exit script if a statement returns a non-true return value.
 set -o errexit
@@ -20,26 +20,20 @@ formula_template=scripts/newrelic-cli.rb.tmpl
 printf "\n"
 echo "Asset gzip: ${asset_darwin}"
 
-shaRaw="$(openssl sha256 < $asset_darwin)"
-shaRaw1="$(echo -n "foo" | openssl sha256)"
-shaRaw2="$(echo -n "foo" | openssl sha256 -hex)"
-shaRaw3="$(openssl sha256 -binary -hex < $asset_darwin)"
+# TODO: Need to figure out how remove the `(stdin)= `prefix
+# from the raw variable value. It only does this during CI.
+stdinSha256="$(openssl sha256 < $asset_darwin)"
 
-export SHA256=${shaRaw#*= } # need to trim `(stdin)= ` from the output
+# Set the sha env varible, remove `(stdin)= ` from the string.
+export SHA256=${stdinSha256#*= }
 
-
-printf "shaRaw: ${shaRaw} \n"
-printf "shaRaw1: ${shaRaw1} \n"
-printf "shaRaw2: ${shaRaw2} \n"
-printf "shaRaw3: ${shaRaw3} \n"
-
-printf  "Asset sha256: ${SHA256}"
+printf "Asset sha256: ${SHA256}"
 printf "\n\n"
 
 echo "Updating formula...\n"
 
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
-sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"$SHA256"'/g' $formula_template > $asset_formula
+sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
 
 echo "Updated formula: ${asset_formula}"
 
