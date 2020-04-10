@@ -98,16 +98,15 @@ jobs:
       - run:
           name: 'Setup custom environment variables 1'
           command: |
-            echo 'export VERY_IMPORTANT=${CIRCLE_TAG}' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(git describe --tags)' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: 'What TAG am I on now?'
           command: |
-            git describe --tags
             echo "--------"
-            echo $VERY_IMPORTANT
+            echo $SERVER_USERNAME
             echo "******"
-            echo $BASH_ENV
+            echo $GIT_TAG
             echo "--------"
       # - run:
       #     name: 'Release the goods'
