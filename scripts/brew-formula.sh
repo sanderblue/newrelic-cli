@@ -8,22 +8,22 @@ set -o errexit
 set -o pipefail
 
 printf "\n"
-echo "TAG_TEST_1: ${TAG_TEST_1}"
-echo "TAG_TEST_2: ${TAG_TEST_2}"
+# echo "TAG_TEST_1: ${TAG_TEST_1}"
+# echo "TAG_TEST_2: ${TAG_TEST_2}"
 # echo "CIRCLE_TAG: $1"
-echo "TAG: ${TAG}"
+echo "GIT_TAG: ${GIT_TAG}"
 echo $PWD
 printf "\n"
 
 ls -la $PWD/dist
 
-asset_path="${PWD}/dist/newrelic-cli_${TAG}_Darwin_x86_64.tar.gz"
+asset_path="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
 
 printf "\n"
 echo ${asset_path}
 printf "\n"
 
-openssl sha256 < ${asset_path}
+# openssl sha256 < ${asset_path}
 
 # sha256_result=$(openssl sha256 < /home/circleci/project/dist/newrelic-cli_0.6.3-test_Darwin_x86_64.tar.gz)
 
