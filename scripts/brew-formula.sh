@@ -20,6 +20,7 @@ ls -la $PWD/dist
 asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
 asset_linux="${PWD}/dist/newrelic-cli_${GIT_TAG}_Linux_x86_64.tar.gz"
 asset_windows="${PWD}/dist/newrelic-cli_${GIT_TAG}_Windows_x86_64.zip"
+asset_formula="${PWD}/dist/newrelic.rb"
 
 printf "\n"
 echo ${asset_darwin}
@@ -34,5 +35,7 @@ sha256_windows=$(openssl sha256 < $asset_windows)
 echo "sha256_darwin:  ${sha256_darwin}"
 echo "sha256_linux:   ${sha256_linux}"
 echo "sha256_windows: ${sha256_windows}"
+
+cat $asset_formula
 
 printf "\n"
