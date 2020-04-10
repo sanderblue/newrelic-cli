@@ -87,7 +87,7 @@ jobs:
     docker:
       - image: circleci/golang:1.14
     environment:
-      TAG: '{{ .Environment.CIRCLE_TAG }}'
+      TAG: $CIRCLE_TAG
     steps:
       - checkout
       - setup_remote_docker:
@@ -96,4 +96,4 @@ jobs:
           name: 'Release the goods'
           command: |
             make release-publish
-            ./scripts/brew-formula.sh {{ .Environment.CIRCLE_TAG }}
+            ./scripts/brew-formula.sh $CIRCLE_TAG
