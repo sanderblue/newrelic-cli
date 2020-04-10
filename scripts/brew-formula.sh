@@ -27,6 +27,7 @@ shaRaw3="$(openssl sha256 -binary -hex < $asset_darwin)"
 
 export SHA256=${shaRaw#*= } # need to trim `(stdin)= ` from the output
 
+
 printf "shaRaw: ${shaRaw} \n"
 printf "shaRaw1: ${shaRaw1} \n"
 printf "shaRaw2: ${shaRaw2} \n"
