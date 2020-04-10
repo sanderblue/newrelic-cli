@@ -98,18 +98,11 @@ jobs:
       - run:
           name: 'Setup custom environment variables 1'
           command: |
-            echo 'export VERY_IMPORTANT=$(git describe --tags)' >> $BASH_ENV
+            echo 'export GIT_TAG=$(git describe --tags)' >> $BASH_ENV
             source $BASH_ENV
-
-            echo $VERY_IMPORTANT
-            echo "******"
       - run:
           name: 'What TAG am I on now?'
           command: |
-            echo "--------"
-            echo $VERY_IMPORTANT
-            echo "******"
-            echo "--------"
-      # - run:
-      #     name: 'Release the goods'
-      #     command: ./scripts/brew-formula.sh
+            echo "Creating Homebrew formula for tag ${GIT_TAG}..."
+
+            ./scripts/brew-formula.sh
