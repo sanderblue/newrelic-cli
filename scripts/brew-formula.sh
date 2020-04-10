@@ -20,14 +20,16 @@ formula_template=scripts/newrelic-cli.rb.tmpl
 printf "\n"
 echo "Asset gzip: ${asset_darwin}"
 
-shaRaw="$(echo -n "foo" | openssl dgst -sha256 -hex)"
-shaRaw1="$(echo -n "foo" | openssl dgst -sha1 -binary | xxd -p)"
+shaRaw="$(openssl sha256 < $asset_darwin)"
+shaRaw1="$(echo -n "foo" | openssl sha256)"
+shaRaw2="$(echo -n "foo" | openssl sha256 -hex)"
 
 export SHA256=${shaRaw#*= } # need to trim `(stdin)= ` from the output
 
 # printf "testA: ${testA} \n"
 printf "shaRaw: ${shaRaw} \n"
 printf "shaRaw1: ${shaRaw1} \n"
+printf "shaRaw2: ${shaRaw2} \n"
 # printf "testB: ${testB} \n"
 
 printf  "Asset sha256: ${SHA256}"
