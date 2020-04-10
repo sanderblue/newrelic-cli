@@ -22,13 +22,20 @@ echo "Asset gzip: ${asset_darwin}"
 
 export SHA256="$(openssl sha256 < $asset_darwin)"
 
-echo "Asset sha256: ${SHA256}"
+testA="$(openssl sha256 < $asset_darwin)"
+testB=${testB#*=}
+
+printf "testA: ${testA} \n"
+printf "testB: ${testB} \n"
+# printf "testB: ${testB} \n"
+
+printf  "Asset sha256: ${SHA256}"
 printf "\n\n"
 
 echo "Updating formula...\n"
 
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
-sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
+sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"$SHA256"'/g' $formula_template > $asset_formula
 
 echo "Updated formula: ${asset_formula}"
 
