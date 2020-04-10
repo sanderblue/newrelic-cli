@@ -14,28 +14,31 @@ printf "\n***********************************************\n"
 echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
 printf "***********************************************\n"
 
-ls -la $PWD
-
 asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
 asset_formula="${PWD}/dist/newrelic-cli.rb"
 formula_template=scripts/newrelic-cli.rb.tmpl
 
 printf "\n\n"
-echo ${asset_darwin}
+echo "Asset gzip: ${asset_darwin}"
 printf "\n\n"
 
 export SHA256=$(openssl sha256 < $asset_darwin)
 
 printf "\n***********************************************\n"
-echo "New asset sha256: ${SHA256}"
+echo "Asset sha256: ${SHA256}"
+printf "***********************************************\n"
+
+printf "\n***********************************************\n"
+echo "Updating formula with new tag and sha256..."
 printf "***********************************************\n"
 
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
-sed -e 's/GIT_TAG/'"${GIT_TAG}"'/g' -e 's/SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
+sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
 
 printf "\n***********************************************\n"
 echo "Updated formula: ${asset_formula}"
 printf "***********************************************\n"
+
 cat ${asset_formula}
 
 
