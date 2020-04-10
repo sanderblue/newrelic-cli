@@ -43,6 +43,7 @@ echo "sha256_windows: ${SHA256_WINDOWS}"
 
 printf "\n\n"
 
+
 cat $asset_formula
 
 envsubst < ${PWD}/scripts/newrelic.rb.tmpl > ${PWD}/dist/newrelic-formula.rb
