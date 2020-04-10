@@ -38,4 +38,5 @@ echo "sha256_windows: ${sha256_windows}"
 
 cat $asset_formula
 
+
 printf "\n"
