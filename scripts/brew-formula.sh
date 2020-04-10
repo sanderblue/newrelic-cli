@@ -29,6 +29,7 @@ printf "testA: ${testA} \n"
 printf "testB: ${testB} \n"
 # printf "testB: ${testB} \n"
 
+
 printf  "Asset sha256: ${SHA256}"
 printf "\n\n"
 
