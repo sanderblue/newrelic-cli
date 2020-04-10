@@ -1,3 +1,0 @@
-bbd75adad3b1b0531bd36d56f6dc57de88c14af1331d7c648872c77189071aa9  newrelic-cli_0.6.1_Darwin_x86_64.tar.gz
-81d1858618b650d1875a5001334aea69e4b61b26ec42ef5bfbe0c9cb9dcd4a09  newrelic-cli_0.6.1_Windows_x86_64.zip
-31545c03e6383c85edff4dd59b997f52e22a075e70e6796febf5360d70ed9164  newrelic-cli_0.6.1_Linux_x86_64.tar.gz
