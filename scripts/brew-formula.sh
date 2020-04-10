@@ -8,8 +8,8 @@ set -o errexit
 set -o pipefail
 
 printf "\n"
-echo "TAG_TEST_1: ${TAG_TEST}"
-echo "TAG_TEST_2: ${TAG_TEST}"
+echo "TAG_TEST_1: ${TAG_TEST_1}"
+echo "TAG_TEST_2: ${TAG_TEST_2}"
 echo "CIRCLE_TAG: ${CIRCLE_TAG}"
 echo "TAG: ${TAG}"
 echo $PWD
