@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit script if you try to use an uninitialized variable.
-set -o nounset
+# set -o nounset
 
 # Exit script if a statement returns a non-true return value.
 set -o errexit
@@ -24,7 +24,7 @@ shaRaw="$(echo -n "foo" | openssl dgst -sha256 -hex)"
 
 export SHA256=${shaRaw#*= } # need to trim `(stdin)= ` from the output
 
-printf "testA: ${testA} \n"
+# printf "testA: ${testA} \n"
 printf "shaRaw: ${shaRaw} \n"
 # printf "testB: ${testB} \n"
 
