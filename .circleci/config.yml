@@ -98,7 +98,7 @@ jobs:
       - run:
           name: 'Setup custom environment variables 1'
           command: |
-            echo 'export GIT_TAG=$(git describe --tags)' >> $BASH_ENV
+            echo 'export GIT_TAG=$(git describe --tags | tr -d "v")' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: 'What TAG am I on now?'
