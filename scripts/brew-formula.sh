@@ -8,7 +8,7 @@ set -o errexit
 set -o pipefail
 
 printf "\n"
-echo "ARG: $1"
+echo "TAG_TEST: $TAG_TEST"
 echo "TAG: $TAG"
 echo $PWD
 printf "\n"

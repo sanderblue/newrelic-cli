@@ -95,5 +95,6 @@ jobs:
       - run:
           name: 'Release the goods'
           command: |
+            echo 'export TAG_TEST=${CIRCLE_TAG}' >> $BASH_ENV
             make release-publish
             ./scripts/brew-formula.sh $CIRCLE_TAG
