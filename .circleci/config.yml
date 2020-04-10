@@ -96,8 +96,7 @@ jobs:
             echo 'export GIT_TAG=$(git describe --tags | tr -d "v")' >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: 'What TAG am I on now?'
+          name: 'Publish release and generate Homebrew formula'
           command: |
-            echo "Creating Homebrew formula for tag ${GIT_TAG}..."
             make release-publish
             ./scripts/brew-formula.sh

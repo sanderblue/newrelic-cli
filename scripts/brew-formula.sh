@@ -10,9 +10,9 @@ set -o errexit
 # rather than that of the last item in a pipeline.
 set -o pipefail
 
-printf "\n"
+printf "\n***********************************************\n"
 echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
-printf "\n"
+printf "\n***********************************************\n"
 
 ls -la $PWD/dist
 
@@ -25,12 +25,16 @@ printf "\n\n"
 
 export SHA256=$(openssl sha256 < $asset_darwin)
 
-echo "sha256_darwin:  ${SHA256}"
-printf "\n\n"
+printf "\n***********************************************\n"
+echo "New asset sha256: ${SHA256}"
+printf "\n***********************************************\n"
 
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
 sed -e 's/GIT_TAG/'"${GIT_TAG}"'/g' -e 's/SHA256/'"${SHA256}"'/g' scripts/newrelic.rb.tmpl > $asset_formula
 
-cat ${PWD}/dist/newrelic-formula.rb
+printf "\n***********************************************\n"
+echo "Updated formula: ${asset_formula}"
+printf "\n***********************************************\n"
+cat ${asset_formula}
 
 printf "\n"
