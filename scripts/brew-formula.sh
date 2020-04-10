@@ -11,7 +11,7 @@ printf "\n"
 # echo "TAG_TEST_1: ${TAG_TEST_1}"
 # echo "TAG_TEST_2: ${TAG_TEST_2}"
 # echo "CIRCLE_TAG: $1"
-echo "GIT_TAG: ${GIT_TAG}"
+# echo "GIT_TAG: ${GIT_TAG}"
 echo $PWD
 printf "\n"
 

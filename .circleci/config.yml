@@ -90,19 +90,22 @@ jobs:
     #   TAG: $CIRCLE_TAG
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      # - setup_remote_docker:
+      #     docker_layer_caching: true
+      # - run:
+      #     name: 'Setup custom environment variables 1'
+      #     command: echo 'export GIT_TAG=${'${CIRCLE_TAG}'}' >> $BASH_ENV
       - run:
           name: 'Setup custom environment variables 1'
-          command: echo 'export GIT_TAG=${'${CIRCLE_TAG^^}'}' >> $BASH_ENV
+          command: echo 'export SERVER_USERNAME=${SERVER_'${CIRCLE_BRANCH^^}'_USERNAME}' >> $BASH_ENV
       - run:
           name: 'What TAG am I on now?'
           command: |
             echo "--------"
-            echo $BASH_ENV
-            echo ""
-            echo $GIT_TAG
+            echo ${SERVER_USERNAME}
+            echo "******"
+            echo ${GIT_TAG}
             echo "--------"
-      - run:
-          name: 'Release the goods'
-          command: ./scripts/brew-formula.sh
+      # - run:
+      #     name: 'Release the goods'
+      #     command: ./scripts/brew-formula.sh
