@@ -17,10 +17,10 @@ asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
 asset_formula="${PWD}/dist/newrelic-cli.rb"
 formula_template=scripts/newrelic-cli.rb.tmpl
 
-printf "\n\n"
+printf "\n"
 echo "Asset gzip: ${asset_darwin}"
 
-export SHA256=$(openssl sha256 < $asset_darwin)
+export SHA256="$(openssl sha256 < $asset_darwin)"
 
 echo "Asset sha256: ${SHA256}"
 printf "\n\n"
