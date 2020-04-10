@@ -101,6 +101,7 @@ jobs:
       - run:
           name: 'What TAG am I on now?'
           command: |
+            git describe --tags
             echo "--------"
             echo ${SERVER_USERNAME}
             echo "******"
