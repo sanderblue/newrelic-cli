@@ -100,10 +100,10 @@ jobs:
           command: echo 'export TAG_TEST_2="{{ .Environment.CIRCLE_TAG }}"' >> $BASH_ENV
       - run:
           name: 'What TAG am I on now?'
-          command: echo $TAG_TEST_1 && echo $TAG_TEST_2 && echo $CIRCLE_TAG
+          command: |
+            echo $TAG_TEST_1
+            echo $TAG_TEST_2
+            echo $CIRCLE_TAG
       - run:
-          name: 'Release the goods 1'
-          command: ./scripts/brew-formula.sh ${CIRCLE_TAG}
-      - run:
-          name: 'Release the goods 2'
-          command: TAG=${CIRCLE_TAG} ./scripts/brew-formula.sh ${CIRCLE_TAG}
+          name: 'Release the goods'
+          command: export TAG=${CIRCLE_TAG} ./scripts/brew-formula.sh

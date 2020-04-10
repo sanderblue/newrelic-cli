@@ -10,7 +10,7 @@ set -o pipefail
 printf "\n"
 echo "TAG_TEST_1: ${TAG_TEST_1}"
 echo "TAG_TEST_2: ${TAG_TEST_2}"
-echo "CIRCLE_TAG: ${CIRCLE_TAG}"
+# echo "CIRCLE_TAG: $1"
 echo "TAG: ${TAG}"
 echo $PWD
 printf "\n"
