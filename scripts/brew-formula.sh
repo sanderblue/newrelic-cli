@@ -23,7 +23,7 @@ echo "Asset gzip: ${asset_darwin}"
 shaRaw="$(openssl sha256 < $asset_darwin)"
 shaRaw1="$(echo -n "foo" | openssl sha256)"
 shaRaw2="$(echo -n "foo" | openssl sha256 -hex)"
-shaRaw3="$(shaRaw | sed 's/^.* //')"
+shaRaw3="$($shaRaw | sed 's/^.* //')"
 
 export SHA256=${shaRaw#*= } # need to trim `(stdin)= ` from the output
 
