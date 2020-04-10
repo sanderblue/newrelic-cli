@@ -8,12 +8,14 @@ set -o errexit
 set -o pipefail
 
 printf "\n"
+echo "ARG: $1"
+echo "TAG: $TAG"
 echo $PWD
 printf "\n"
 
 ls -la $PWD/dist
 
-asset_path="${PWD}/dist/newrelic-cli_${CIRCLE_TAG}_Darwin_x86_64.tar.gz"
+asset_path="${PWD}/dist/newrelic-cli_${TAG}_Darwin_x86_64.tar.gz"
 
 printf "\n"
 echo ${asset_path}
