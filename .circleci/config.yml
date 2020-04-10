@@ -100,13 +100,15 @@ jobs:
           command: |
             echo 'export VERY_IMPORTANT=$(git describe --tags)' >> $BASH_ENV
             source $BASH_ENV
+
+            echo $VERY_IMPORTANT
+            echo "******"
       - run:
           name: 'What TAG am I on now?'
           command: |
             echo "--------"
-            echo $SERVER_USERNAME
+            echo $VERY_IMPORTANT
             echo "******"
-            echo $GIT_TAG
             echo "--------"
       # - run:
       #     name: 'Release the goods'
