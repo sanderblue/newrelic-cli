@@ -37,4 +37,5 @@ echo "Updated formula: ${asset_formula}"
 printf "***********************************************\n"
 cat ${asset_formula}
 
+
 printf "\n"
