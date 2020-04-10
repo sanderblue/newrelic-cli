@@ -23,7 +23,7 @@ echo "Asset gzip: ${asset_darwin}"
 export SHA256="$(openssl sha256 < $asset_darwin)"
 
 testA="$(openssl sha256 < $asset_darwin)"
-testB=${testB#*=}
+testB=${testA#*=}
 
 printf "testA: ${testA} \n"
 printf "testB: ${testB} \n"
