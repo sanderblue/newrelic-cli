@@ -21,11 +21,13 @@ printf "\n"
 echo "Asset gzip: ${asset_darwin}"
 
 shaRaw="$(echo -n "foo" | openssl dgst -sha256 -hex)"
+shaRaw1="$(echo -n "foo" | openssl dgst -sha1 -binary | xxd -p)"
 
 export SHA256=${shaRaw#*= } # need to trim `(stdin)= ` from the output
 
 # printf "testA: ${testA} \n"
 printf "shaRaw: ${shaRaw} \n"
+printf "shaRaw1: ${shaRaw1} \n"
 # printf "testB: ${testB} \n"
 
 printf  "Asset sha256: ${SHA256}"
