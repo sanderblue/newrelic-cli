@@ -59,9 +59,15 @@ git clone ${upstream_homebrew}
 
 mv $asset_formula ${PWD}/homebrew-core/Formula
 
+# Change to local homebrew-core and output updates
+cd homebrew-core
+
+git config user.email "sblue@newrelic.com"
+git config user.name "Sander Blue"
+
 # change to local copy of forked homebrew-core and output updates
 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-cd homebrew-core && git status
+git status
 
 # Display diff without a pager so script can continue
 git --no-pager diff
