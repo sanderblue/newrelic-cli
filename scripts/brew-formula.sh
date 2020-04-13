@@ -35,7 +35,7 @@ echo "Updating formula...\n"
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
 sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
 
-echo "Updated formula: ${asset_formula}"
+echo "Updated formula: ${asset_formula} "
 
 cat ${asset_formula}
 
