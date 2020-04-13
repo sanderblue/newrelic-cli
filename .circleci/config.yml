@@ -87,6 +87,9 @@ jobs:
     docker:
       - image: circleci/golang:1.14
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '73:b9:8e:37:fa:cd:52:8a:df:9a:49:e3:bb:0f:6f:d2'
       - checkout
       # - setup_remote_docker:
       #     docker_layer_caching: true
