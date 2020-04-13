@@ -40,3 +40,12 @@ echo "Updated formula: ${asset_formula} "
 cat ${asset_formula}
 
 printf "\n***********************************************\n"
+
+printf "Generating pull request to newrelic-forks/homebrew-core..."
+sleep 3
+
+git clone git@github.com:newrelic-forks/homebrew-core.git
+
+mv $asset_formula ${PWD}/homebrew-core/Formula
+
+cd homebrew-core && git status
