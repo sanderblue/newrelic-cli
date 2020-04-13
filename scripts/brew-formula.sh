@@ -48,4 +48,4 @@ git clone git@github.com:newrelic-forks/homebrew-core.git
 
 mv $asset_formula ${PWD}/homebrew-core/Formula
 
-cd homebrew-core && git status
+cd homebrew-core && git status && git diff
