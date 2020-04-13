@@ -55,6 +55,13 @@ sleep 3
 
 printf "Cloning ${homebrew_repo_name}...\n"
 
+git config user.email
+git config user.name
+sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
+
+git config --global user.email "william.a.blue@gmail.com"
+git config --global user.name "sanderblue"
+
 git clone ${upstream_homebrew}
 
 mv $asset_formula ${PWD}/homebrew-core/Formula
@@ -62,8 +69,11 @@ mv $asset_formula ${PWD}/homebrew-core/Formula
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-git config user.email "william.a.blue@gmail.com"
-git config user.name "Sander Blue"
+git config --global user.email "william.a.blue@gmail.com"
+git config --global user.name "sanderblue"
+
+git config user.email
+git config user.name
 
 # change to local copy of forked homebrew-core and output updates
 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
@@ -71,18 +81,14 @@ git status
 
 # Display diff without a pager so script can continue
 git --no-pager diff
-
-# TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-sleep 3
+sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 homebrew_release_branch="release/${GIT_TAG}"
 
 git checkout -b ${homebrew_release_branch}
 git add Formula/newrelic-cli.rb
 git status
-
-# TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-sleep 3
+sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 git commit -m "newrelic-cli ${GIT_TAG}"
 git push --set-upstream sanderblue ${homebrew_release_branch}
