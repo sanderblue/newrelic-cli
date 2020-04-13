@@ -90,4 +90,4 @@ git status
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 git commit -m "newrelic-cli ${GIT_TAG}"
-git push --set-upstream sanderblue ${homebrew_release_branch}
+git push origin ${homebrew_release_branch}
