@@ -69,7 +69,7 @@ mv $asset_formula ${PWD}/homebrew-core/Formula
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-printf "\n\n homebrew-core \n\n"
+printf "\n\n homebrew-core \n\n "
 git config -l
 printf "\n\n *** config *** \n\n"
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
