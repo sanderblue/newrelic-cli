@@ -72,7 +72,7 @@ sleep 3
 homebrew_release_branch="release/${GIT_TAG}"
 
 git checkout -b ${homebrew_release_branch}
-git add ${PWD}/homebrew-core/Formula/newrelic-cli.rb
+git add Formula/newrelic-cli.rb
 git status
 
 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
