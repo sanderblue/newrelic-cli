@@ -54,7 +54,9 @@ sleep 3
 
 printf "Cloning ${homebrew_repo_name}...\n"
 
+printf "\n\n"
 git config -l
+printf "\n\n *** config *** \n\n"
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 git config --global user.email "william.a.blue@gmail.com"
@@ -67,8 +69,10 @@ mv $asset_formula ${PWD}/homebrew-core/Formula
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-git config user.email
-git config user.name
+printf "\n\n homebrew-core \n\n"
+git config -l
+printf "\n\n *** config *** \n\n"
+sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 # change to local copy of forked homebrew-core and output updates
 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
