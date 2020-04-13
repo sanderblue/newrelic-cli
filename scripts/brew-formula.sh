@@ -62,7 +62,7 @@ mv $asset_formula ${PWD}/homebrew-core/Formula
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-git config user.email "sblue@newrelic.com"
+git config user.email "william.a.blue@gmail.com"
 git config user.name "Sander Blue"
 
 # change to local copy of forked homebrew-core and output updates
