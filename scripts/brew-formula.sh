@@ -41,11 +41,40 @@ cat ${asset_formula}
 
 printf "\n***********************************************\n"
 
-printf "Generating pull request to newrelic-forks/homebrew-core..."
+# Change this to `newrelic-forks/homebrew-core`!!!!!
+homebrew_repo_name="sanderblue/homebrew-core"
+
+upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
+
+printf "Preparing pull request to homebrew-core...\n"
 sleep 3
 
-git clone git@github.com:newrelic-forks/homebrew-core.git
+# Change this to `newrelic-forks`!!!!!
+
+printf "Cloning ${homebrew_repo_name}...\n"
+
+git clone ${upstream_homebrew}
 
 mv $asset_formula ${PWD}/homebrew-core/Formula
 
-cd homebrew-core && git status && git diff
+# change to local copy of forked homebrew-core and output updates
+# TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
+cd homebrew-core && git status
+
+# Automatically exit the diff display
+git diff --exit-code
+
+# TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
+sleep 3
+
+homebrew_release_branch="release/${GIT_TAG}"
+
+git checkout -b ${homebrew_release_branch}
+git add ${PWD}/homebrew-core/Formula/newrelic-cli.rb
+git status
+
+# TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
+sleep 3
+
+git commit -m "newrelic-cli ${GIT_TAG}"
+git push --set-upstream sanderblue ${homebrew_release_branch}
