@@ -43,7 +43,6 @@ printf "\n***********************************************\n"
 
 # Change this to `newrelic-forks/homebrew-core`!!!!!
 homebrew_repo_name="sanderblue/homebrew-core"
-
 upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 
 printf "\n"
@@ -55,8 +54,7 @@ sleep 3
 
 printf "Cloning ${homebrew_repo_name}...\n"
 
-git config user.email
-git config user.name
+git config -l
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 git config --global user.email "william.a.blue@gmail.com"
@@ -68,9 +66,6 @@ mv $asset_formula ${PWD}/homebrew-core/Formula
 
 # Change to local homebrew-core and output updates
 cd homebrew-core
-
-git config --global user.email "william.a.blue@gmail.com"
-git config --global user.name "sanderblue"
 
 git config user.email
 git config user.name
