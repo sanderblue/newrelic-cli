@@ -46,7 +46,9 @@ homebrew_repo_name="sanderblue/homebrew-core"
 
 upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 
-printf "Preparing pull request to homebrew-core...\n"
+printf "\n"
+printf "Preparing pull request to ${homebrew_repo_name}..."
+printf "\n"
 sleep 3
 
 # Change this to `newrelic-forks`!!!!!
@@ -61,8 +63,8 @@ mv $asset_formula ${PWD}/homebrew-core/Formula
 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 cd homebrew-core && git status
 
-# Automatically exit the diff display
-git diff --exit-code
+# Display diff without a pager so script can continue
+git --no-pager diff
 
 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 sleep 3
