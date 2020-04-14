@@ -28,19 +28,14 @@ stdinSha256="$(openssl sha256 < $asset_darwin)"
 export SHA256=${stdinSha256#*= }
 
 printf "Asset sha256: ${SHA256}"
-printf "\n\n"
+printf "\n"
 
-printf "Updating formula...\n"
+# printf "Updating formula...\n"
 
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
 # sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
 
-formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
-formula_sha256='  sha256 "'${SHA256}'"'
-
-echo "Updated formula: ${asset_formula} "
-
-cat ${asset_formula}
+# printf "Updated formula: ${asset_formula} "
 
 printf "\n***********************************************\n"
 
@@ -72,7 +67,9 @@ git clone ${upstream_homebrew}
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-homebrew_formula_file="Formula/newrelic-cli.rb"
+homebrew_formula_file='Formula/newrelic-cli.rb'
+formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
+formula_sha256='  sha256 "'${SHA256}'"'
 
 sed -i '' '4s/.*/'"${formula_url}"'/' ${homebrew_formula_file}
 sed -i '' '5s/.*/'"${formula_sha256}"'/' ${homebrew_formula_file}
