@@ -101,6 +101,7 @@ homebrew_release_branch="release/${GIT_TAG}"
 git checkout -b $homebrew_release_branch
 git add $homebrew_formula_file
 git status
+
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 git commit -m "newrelic-cli ${GIT_TAG}"
