@@ -24,10 +24,13 @@ echo "Asset gzip: ${asset_darwin}"
 # from the raw variable value. It only does this during CI.
 stdinSha256="$(openssl sha256 < $asset_darwin)"
 
+sha256_trimmed=stdinSha256 | tr -d "(stdin)= "
+
 # Set the sha env varible, remove `(stdin)= ` from the string.
 export SHA256=${stdinSha256#*= }
 
-printf "Asset sha256: ${SHA256}"
+printf "Asset sha256:         ${SHA256} \n"
+printf "Asset sha256_trimmed: ${sha256_trimmed} \n"
 printf "\n"
 
 # printf "Updating formula...\n"
@@ -92,7 +95,6 @@ git status
 # Display diff without a pager so script can continue
 git --no-pager diff
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-
 
 homebrew_release_branch="release/${GIT_TAG}"
 
