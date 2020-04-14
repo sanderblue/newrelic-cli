@@ -30,10 +30,13 @@ export SHA256=${stdinSha256#*= }
 printf "Asset sha256: ${SHA256}"
 printf "\n\n"
 
-echo "Updating formula...\n"
+printf "Updating formula...\n"
 
 # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
-sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
+# sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
+
+formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
+formula_sha256='  sha256 "'${SHA256}'"'
 
 echo "Updated formula: ${asset_formula} "
 
@@ -64,10 +67,15 @@ git config --global user.name "sanderblue"
 
 git clone ${upstream_homebrew}
 
-mv $asset_formula ${PWD}/homebrew-core/Formula
+# mv $asset_formula ${PWD}/homebrew-core/Formula
 
 # Change to local homebrew-core and output updates
 cd homebrew-core
+
+homebrew_formula_file="Formula/newrelic-cli.rb"
+
+sed -i '' '4s/.*/'"${formula_url}"'/' ${homebrew_formula_file}
+sed -i '' '5s/.*/'"${formula_sha256}"'/' ${homebrew_formula_file}
 
 printf "\n\n homebrew-core \n\n "
 git config -l
@@ -85,7 +93,7 @@ sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 homebrew_release_branch="release/${GIT_TAG}"
 
 git checkout -b ${homebrew_release_branch}
-git add Formula/newrelic-cli.rb
+git add ${homebrew_formula_file}
 git status
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
