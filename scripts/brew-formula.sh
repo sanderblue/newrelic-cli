@@ -68,13 +68,17 @@ git clone ${upstream_homebrew}
 cd homebrew-core
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
+tmp_formula_file='Formula/newrelic-cli.rb.tmp'
 formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
 formula_sha256='  sha256 "'${SHA256}'"'
 
 sed --help
 
-sed -i '' '4s/.*/'"${formula_url}"'/' ${homebrew_formula_file}
-sed -i '' '5s/.*/'"${formula_sha256}"'/' ${homebrew_formula_file}
+cp ${homebrew_formula_file} ${tmp_formula_file}
+
+sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' ${tmp_formula_file} > ${homebrew_formula_file}
+
+rm ${tmp_formula_file}
 
 printf "\n\n homebrew-core \n\n "
 git config -l
