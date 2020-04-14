@@ -24,7 +24,7 @@ echo "Asset gzip: ${asset_darwin}"
 # from the raw variable value. It only does this during CI.
 stdinSha256="$(openssl sha256 < $asset_darwin)"
 
-sha256_trimmed=stdinSha256 | tr -d "(stdin)= "
+sha256_trimmed=$(echo $stdinSha256 | tr -d "(stdin)= ")
 
 # Set the sha env varible, remove `(stdin)= ` from the string.
 export SHA256=${stdinSha256#*= }
