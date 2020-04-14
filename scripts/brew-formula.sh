@@ -60,7 +60,7 @@ sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 git config --global user.email "william.a.blue@gmail.com"
 git config --global user.name "sanderblue"
 
-git clone ${upstream_homebrew}
+git clone $upstream_homebrew
 
 # mv $asset_formula ${PWD}/homebrew-core/Formula
 
@@ -74,11 +74,11 @@ formula_sha256='  sha256 "'${SHA256}'"'
 
 sed --help
 
-cp ${homebrew_formula_file} ${tmp_formula_file}
+cp $homebrew_formula_file $tmp_formula_file
 
-sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' ${tmp_formula_file} > ${homebrew_formula_file}
+sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' $tmp_formula_file > $homebrew_formula_file
 
-rm ${tmp_formula_file}
+rm $tmp_formula_file
 
 printf "\n\n homebrew-core \n\n "
 git config -l
@@ -96,10 +96,10 @@ sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 homebrew_release_branch="release/${GIT_TAG}"
 
-git checkout -b ${homebrew_release_branch}
-git add ${homebrew_formula_file}
+git checkout -b $homebrew_release_branch
+git add $homebrew_formula_file
 git status
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 git commit -m "newrelic-cli ${GIT_TAG}"
-git push origin ${homebrew_release_branch}
+git push origin $homebrew_release_branch
