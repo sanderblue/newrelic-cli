@@ -71,6 +71,8 @@ homebrew_formula_file='Formula/newrelic-cli.rb'
 formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
 formula_sha256='  sha256 "'${SHA256}'"'
 
+sed --help
+
 sed -i '' '4s/.*/'"${formula_url}"'/' ${homebrew_formula_file}
 sed -i '' '5s/.*/'"${formula_sha256}"'/' ${homebrew_formula_file}
 
