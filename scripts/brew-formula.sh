@@ -87,6 +87,7 @@ git status
 git --no-pager diff
 sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
+
 homebrew_release_branch="release/${GIT_TAG}"
 
 git checkout -b ${homebrew_release_branch}
