@@ -11,6 +11,9 @@ set -o errexit
 set -o pipefail
 
 printf "\n***********************************************\n"
+
+echo "CIRCLE_TAG: ${CIRCLE_TAG}"
+
 echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
 
 asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
