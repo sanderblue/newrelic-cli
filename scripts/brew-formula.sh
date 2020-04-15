@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit script if you try to use an uninitialized variable.
-set -o nounset
+# set -o nounset
 
 # Exit script if a statement returns a non-true return value.
 set -o errexit
@@ -13,6 +13,7 @@ set -o pipefail
 printf "\n***********************************************\n"
 
 echo "CIRCLE_TAG: ${CIRCLE_TAG}"
+echo "TAG: ${TAG}"
 
 echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
 
