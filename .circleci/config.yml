@@ -102,3 +102,4 @@ jobs:
           name: 'Publish release and generate Homebrew formula'
           command: |
             make release-publish
+            ./scripts/brew-update-formula-pr.sh
