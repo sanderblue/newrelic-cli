@@ -45,15 +45,15 @@ sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_t
 formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
 formula_sha256='  sha256 "'${SHA256}'"'
 
-sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' scripts/newrelic-cli.rb.tmpl > scripts/newrelic-cli.rb.te
-
-exit 0 ########
+sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' scripts/newrelic-cli.rb.tmpl > scripts/newrelic-cli.rb
 
 echo "Updated formula: ${asset_formula} "
 
 cat ${asset_formula}
 
 printf "\n***********************************************\n"
+
+exit 0
 
 # Change this to `newrelic-forks/homebrew-core`!!!!!
 homebrew_repo_name="sanderblue/homebrew-core"
