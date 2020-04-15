@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+#!/usr/bin/env bash
+
+##
+# https://circleci.com/docs/2.0/using-shell-scripts/#set-error-flags
+##
+
 # Exit script if you try to use an uninitialized variable.
 # set -o nounset
 
@@ -10,47 +16,92 @@ set -o errexit
 # rather than that of the last item in a pipeline.
 set -o pipefail
 
-printf "\n***********************************************\n"
+printf "\n**************************************************\n"
 
-echo "CIRCLE_TAG: $1"
-echo "TAG: ${TAG}"
+# if [[ "$STR" == *"$SUB"* ]]; then
+#   echo "It's there."
+# fi
 
-echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
+GIT_TAG=$(echo $1 | tr -d "v")
 
-asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
-asset_formula="${PWD}/dist/newrelic-cli.rb"
-formula_template=scripts/newrelic-cli.rb.tmpl
+# asset_file_ext=".tar.gz"
+
+# if [[ "$GIT_TAG" == *"SNAPSHOT"* ]]; then
+#   asset_file_ext=""
+# fi
+
+asset_file=$(find dist -name "*newrelic_darwin*")
+
+printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n\n"
+
+ls ${PWD}/dist
 
 printf "\n"
-echo "Asset gzip: ${asset_darwin}"
 
-# TODO: Need to figure out how remove the `(stdin)= `prefix
-# from the raw variable value. It only does this during CI.
-stdinSha256="$(openssl sha256 < $asset_darwin | sed 's/(stdin)= //')"
+asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
 
-printf "New stdinSha256: ${stdinSha256} \n"
+printf "\n asset_file: ${asset_file} \n"
+printf "\n Asset gzip: ${asset_darwin} \n"
 
-# Set the sha env varible, remove `(stdin)= ` from the string.
-export SHA256=${stdinSha256#*= }
+SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 
-printf "Asset sha256: ${SHA256}"
-printf "\n\n"
+printf "\nNew SHA256: ${SHA256} \n"
+printf "\n**************************************************\n"
+exit 0
 
-echo "Updating formula...\n"
 
-# Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
-sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
 
-formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
-formula_sha256='  sha256 "'${SHA256}'"'
 
-sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' scripts/newrelic-cli.rb.tmpl > scripts/newrelic-cli.rb.te
 
-exit 0 ########
 
-echo "Updated formula: ${asset_formula} "
+# # Exit script if you try to use an uninitialized variable.
+# # set -o nounset
 
-cat ${asset_formula}
+# # Exit script if a statement returns a non-true return value.
+# set -o errexit
+
+# # Use the error status of the first failure,
+# # rather than that of the last item in a pipeline.
+# set -o pipefail
+
+# printf "\n***********************************************\n"
+
+# echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
+
+# asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
+# asset_formula="${PWD}/dist/newrelic-cli.rb"
+# formula_template=scripts/newrelic-cli.rb.tmpl
+
+# printf "\n"
+# echo "Asset gzip: ${asset_darwin}"
+
+# # TODO: Need to figure out how remove the `(stdin)= `prefix
+# # from the raw variable value. It only does this during CI.
+# stdinSha256="$(openssl sha256 < $asset_darwin | sed 's/(stdin)= //')"
+
+# printf "New stdinSha256: ${stdinSha256} \n"
+
+# # Set the sha env varible, remove `(stdin)= ` from the string.
+# export SHA256=${stdinSha256#*= }
+
+# printf "Asset sha256: ${SHA256}"
+# printf "\n\n"
+
+# echo "Updating formula...\n"
+
+# # Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
+# sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
+
+# formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
+# formula_sha256='  sha256 "'${SHA256}'"'
+
+# sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' scripts/newrelic-cli.rb.tmpl > scripts/newrelic-cli.rb.te
+
+# exit 0 ########
+
+# echo "Updated formula: ${asset_formula} "
+
+# cat ${asset_formula}
 
 printf "\n***********************************************\n"
 

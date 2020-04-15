@@ -23,6 +23,8 @@ builds:
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.appName={{.Binary}}
         -X github.com/sanderblue/newrelic-cli/internal/client.version={{.Version}}
+    hooks:
+      post: ./scripts/brew-formula.sh {{.Version}}
 
 release:
   # Mark as a pre-release for now
