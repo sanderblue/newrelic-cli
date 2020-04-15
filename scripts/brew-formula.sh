@@ -10,32 +10,20 @@ set -o errexit
 # rather than that of the last item in a pipeline.
 set -o pipefail
 
-printf "\n***********************************************\n"
+printf "\n**************************************************\n"
+printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
-echo "Generating Homebrew formula for git tag: ${GIT_TAG}"
+asset_file=$(find ${PWD}/dist -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
-printf "\n\n"
-ls ${PWD}/dist
-printf "\n\n"
-
-asset_darwin="${PWD}/dist/newrelic-cli_${GIT_TAG}_Darwin_x86_64.tar.gz"
 asset_formula="${PWD}/dist/newrelic-cli.rb"
-formula_template=scripts/newrelic-cli.rb.tmpl
+formula_template=s"${PWD}/scripts/newrelic-cli.rb.tmpl"
 
-printf "\n"
-echo "Asset gzip: ${asset_darwin}"
+printf "\nAsset gzip: ${asset_file}"
 
-# TODO: Need to figure out how remove the `(stdin)= `prefix
-# from the raw variable value. It only does this during CI.
-stdinSha256="$(openssl sha256 < $asset_darwin | sed 's/(stdin)= //')"
+SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 
-printf "New stdinSha256: ${stdinSha256} \n"
-
-# Set the sha env varible, remove `(stdin)= ` from the string.
-export SHA256=${stdinSha256#*= }
-
-printf "Asset sha256: ${SHA256}"
-printf "\n\n"
+printf "\nNew SHA256: ${SHA256} \n"
+printf "\n**************************************************\n"
 
 echo "Updating formula...\n"
 
