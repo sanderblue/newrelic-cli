@@ -12,7 +12,7 @@ set -o pipefail
 
 printf "\n***********************************************\n"
 
-echo "CIRCLE_TAG: ${CIRCLE_TAG}"
+echo "CIRCLE_TAG: $1"
 echo "TAG: ${TAG}"
 
 echo "Generating Homebrew formula for git tag: ${GIT_TAG}"

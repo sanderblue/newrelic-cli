@@ -105,4 +105,4 @@ jobs:
             TAG: .Environment.CIRCLE_TAG
           command: |
             make release-publish
-            ./scripts/brew-formula.sh
+            ./scripts/brew-formula.sh ${CIRCLE_TAG}
