@@ -97,7 +97,7 @@ jobs:
           name: 'Setup custom environment variables 1'
           command: |
             echo 'export GIT_TAG=$(git describe --tags | tr -d "v")' >> $BASH_ENV
-            echo 'export TAG={{ .Environment.CIRCLE_TAG }}' >> $BASH_ENV
+            echo 'export TAG=$CIRCLE_TAG' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: 'Publish release and generate Homebrew formula'
