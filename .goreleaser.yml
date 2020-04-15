@@ -24,7 +24,7 @@ builds:
       - -s -w -X main.version={{.Version}} -X main.appName={{.Binary}}
         -X github.com/sanderblue/newrelic-cli/internal/client.version={{.Version}}
     hooks:
-      post: printf "\n\n"; ls -la dist; printf "\n\n"
+      post: printf "\n\n"; ls -la dist; printf "\n\n"; exit 1
 
 release:
   # Mark as a pre-release for now
