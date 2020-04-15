@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+##
+# https://circleci.com/docs/2.0/using-shell-scripts/#set-error-flags
+##
+
 # Exit script if you try to use an uninitialized variable.
-# set -o nounset
+set -o nounset
 
 # Exit script if a statement returns a non-true return value.
 set -o errexit
@@ -13,10 +17,7 @@ set -o pipefail
 printf "\n**************************************************\n"
 printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
-asset_file=$(find ${PWD}/dist -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
-
-asset_formula="${PWD}/dist/newrelic-cli.rb"
-formula_template=s"${PWD}/scripts/newrelic-cli.rb.tmpl"
+asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
 printf "\nAsset gzip: ${asset_file}"
 
@@ -25,71 +26,47 @@ SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 printf "\nNew SHA256: ${SHA256} \n"
 printf "\n**************************************************\n"
 
-echo "Updating formula...\n"
-
-# Inject the current git tag and updated sha into the newrelic-cli Homebrew formula
-sed -e 's/\$GIT_TAG/'"${GIT_TAG}"'/g' -e 's/\$SHA256/'"${SHA256}"'/g' $formula_template > $asset_formula
-
-formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
-formula_sha256='  sha256 "'${SHA256}'"'
-
-sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' scripts/newrelic-cli.rb.tmpl > scripts/newrelic-cli.rb
-
-echo "Updated formula: ${asset_formula} "
-
-cat ${asset_formula}
-
-printf "\n***********************************************\n"
-
-exit 0
-
-# Change this to `newrelic-forks/homebrew-core`!!!!!
 homebrew_repo_name="sanderblue/homebrew-core"
 upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 
-printf "\n"
-printf "Preparing pull request to ${homebrew_repo_name}..."
-printf "\n"
-sleep 3
-
-# Change this to `newrelic-forks`!!!!!
-
+printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
 printf "Cloning ${homebrew_repo_name}...\n"
 
-printf "\n\n"
-git config -l
-printf "\n\n *** config *** \n\n"
-sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-
+# Set git config to our GitHub "machine user" nr-developer-toolkit
+# https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
 git config --global user.email "william.a.blue@gmail.com"
-git config --global user.name "sanderblue"
+git config --global user.name "Sander Blue"
 
-git clone ${upstream_homebrew}
-
-mv $asset_formula ${PWD}/homebrew-core/Formula
+# Clone homebrew-core fork
+git clone $upstream_homebrew
 
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-printf "\n\n homebrew-core \n\n "
-git config -l
-printf "\n\n *** config *** \n\n"
-sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
+homebrew_formula_file='Formula/newrelic-cli.rb'
+tmp_formula_file='Formula/newrelic-cli.rb.tmp'
 
-# change to local copy of forked homebrew-core and output updates
-# TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-git status
+# Set variables for lines to replace in the formula (lines 4 and 5)
+formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
+formula_sha256='  sha256 "'${SHA256}'"'
 
-# Display diff without a pager so script can continue
+# Make temporary copy of existing formula file
+cp $homebrew_formula_file $tmp_formula_file
+
+# Replace lines 4 and 5 in the formula file, using the .tmp file as a template
+sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' $tmp_formula_file > $homebrew_formula_file
+
+# Remove the temporary file
+rm $tmp_formula_file
+
+# Display diff (without a pager so script can continue)
 git --no-pager diff
-sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
 
 homebrew_release_branch="release/${GIT_TAG}"
 
-git checkout -b ${homebrew_release_branch}
+# Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
+git checkout -b $homebrew_release_branch
 git add Formula/newrelic-cli.rb
 git status
-sleep 3 # TODO: FOR TESTING PURPOSES ONLY! REMOVE WHEN READY
-
-git commit -m "newrelic-cli ${GIT_TAG}"
-git push origin ${homebrew_release_branch}
+git commit -m "newrelic-cli ${GIT_TAG}" # homebrew recommended commit message format
+git push origin $homebrew_release_branch
