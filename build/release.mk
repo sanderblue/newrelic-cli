@@ -19,9 +19,9 @@ release-clean:
 	@echo "=== $(PROJECT_NAME) === [ release-clean    ]: distribution files..."
 	@rm -rfv $(DIST_DIR) $(SRCDIR)/tmp
 
-release-publish: clean tools docker-login snapcraft-login release-notes
+release-publish: clean tools
 	@echo "=== $(PROJECT_NAME) === [ release-publish  ]: Publishing release via $(REL_CMD)"
-	$(REL_CMD) --release-notes=$(SRCDIR)/tmp/$(RELEASE_NOTES_FILE)
+	$(REL_CMD)
 	$(HOMEBREW_FORMULA_SCRIPT)
 
 # Local Snapshot
