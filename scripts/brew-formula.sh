@@ -20,57 +20,57 @@ export GIT_TAG=$(git describe --tags | tr -d "v")
 
 printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
-asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
+# asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
-printf "\nAsset gzip: ${asset_file}"
+# printf "\nAsset gzip: ${asset_file}"
 
 
-SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
+# SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 
-printf "\nNew SHA256: ${SHA256} \n"
-printf "\n**************************************************\n"
+# printf "\nNew SHA256: ${SHA256} \n"
+# printf "\n**************************************************\n"
 
-homebrew_repo_name="sanderblue/homebrew-core"
-upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
+# homebrew_repo_name="sanderblue/homebrew-core"
+# upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 
-printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
-printf "Cloning ${homebrew_repo_name}...\n"
+# printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
+# printf "Cloning ${homebrew_repo_name}...\n"
 
-# Set git config to our GitHub "machine user" nr-developer-toolkit
-# https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
-git config --global user.email "william.a.blue@gmail.com"
-git config --global user.name "Sander Blue"
+# # Set git config to our GitHub "machine user" nr-developer-toolkit
+# # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
+# git config --global user.email "william.a.blue@gmail.com"
+# git config --global user.name "Sander Blue"
 
-# Clone homebrew-core fork
-git clone $upstream_homebrew
+# # Clone homebrew-core fork
+# git clone $upstream_homebrew
 
-# Change to local homebrew-core and output updates
-cd homebrew-core
+# # Change to local homebrew-core and output updates
+# cd homebrew-core
 
-homebrew_formula_file='Formula/newrelic-cli.rb'
-tmp_formula_file='Formula/newrelic-cli.rb.tmp'
+# homebrew_formula_file='Formula/newrelic-cli.rb'
+# tmp_formula_file='Formula/newrelic-cli.rb.tmp'
 
-# Set variables for lines to replace in the formula (lines 4 and 5)
-formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
-formula_sha256='  sha256 "'${SHA256}'"'
+# # Set variables for lines to replace in the formula (lines 4 and 5)
+# formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
+# formula_sha256='  sha256 "'${SHA256}'"'
 
-# Make temporary copy of existing formula file
-cp $homebrew_formula_file $tmp_formula_file
+# # Make temporary copy of existing formula file
+# cp $homebrew_formula_file $tmp_formula_file
 
-# Replace lines 4 and 5 in the formula file, using the .tmp file as a template
-sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' $tmp_formula_file > $homebrew_formula_file
+# # Replace lines 4 and 5 in the formula file, using the .tmp file as a template
+# sed -e '4s/.*/'"${formula_url}"'/' -e '5s/.*/'"${formula_sha256}"'/' $tmp_formula_file > $homebrew_formula_file
 
-# Remove the temporary file
-rm $tmp_formula_file
+# # Remove the temporary file
+# rm $tmp_formula_file
 
-# Display diff (without a pager so script can continue)
-git --no-pager diff
+# # Display diff (without a pager so script can continue)
+# git --no-pager diff
 
-homebrew_release_branch="release/${GIT_TAG}"
+# homebrew_release_branch="release/${GIT_TAG}"
 
-# Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
-git checkout -b $homebrew_release_branch
-git add Formula/newrelic-cli.rb
-git status
-git commit -m "newrelic-cli ${GIT_TAG}" # homebrew recommended commit message format
-git push origin $homebrew_release_branch
+# # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
+# git checkout -b $homebrew_release_branch
+# git add Formula/newrelic-cli.rb
+# git status
+# git commit -m "newrelic-cli ${GIT_TAG}" # homebrew recommended commit message format
+# git push origin $homebrew_release_branch
