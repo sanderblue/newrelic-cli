@@ -50,7 +50,12 @@ printf "\nGit remote: "
 git remote -v
 printf "Switching remote origin to use SSH...\n\n"
 
-git remote set-url origin $upstream_homebrew
+# Set remote repo to SSH auth
+# git remote set-url origin $upstream_homebrew
+
+$git_username="sanderblue"
+
+git remote set-url origin "https://${git_username}:${GITHUB_TOKEN}@github.com/${homebrew_repo_name}"
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
@@ -78,11 +83,12 @@ rm $tmp_formula_file
 # Display diff (without a pager so script can continue)
 git --no-pager diff
 
-homebrew_release_branch="release/${GIT_TAG}"
-
-git config user.email
+printf "\n"
+git config -l
+printf "\n"
 
 # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
+homebrew_release_branch="release/${GIT_TAG}"
 printf "\n Checkout...\n"
 git checkout -b $homebrew_release_branch
 printf "\n git add...\n"
