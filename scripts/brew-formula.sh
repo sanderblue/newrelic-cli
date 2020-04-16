@@ -20,11 +20,8 @@ export GIT_TAG=$(git describe --tags | tr -d "v")
 
 printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
-printf "Directory - ${PWD} \n\n"
-
-ls -la
-
-
+printf "Directory - ${PWD} \n"
+printf "Actor - ${GITHUB_ACTOR} \n\n"
 
 asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
@@ -46,6 +43,9 @@ printf "\n**************************************************\n"
 
 # Change to local homebrew-core and output updates
 cd homebrew-core
+
+email=$(git config user.email)
+printf "Git User email: $email"
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
