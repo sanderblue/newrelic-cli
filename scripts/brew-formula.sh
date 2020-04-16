@@ -44,6 +44,10 @@ homebrew_repo_name="sanderblue/homebrew-core"
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
+printf "\nGit remote: "
+git remote -v
+printf "\n\n"
+
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
 git config --local user.email "william.a.blue@gmail.com"
