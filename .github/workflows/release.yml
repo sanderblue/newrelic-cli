@@ -32,7 +32,6 @@ jobs:
         with:
           repository: sanderblue/homebrew-core
           path: homebrew-core
-          ssh-key: ${{ secrets.PERSONAL_SSH_KEY }}
 
       # - name: Install SSH key
       #   uses: shimataro/ssh-key-action@v2
@@ -45,8 +44,8 @@ jobs:
         shell: bash
         run: ./scripts/brew-formula.sh
         env:
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
-          PAT: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          # GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          # PAT: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           PERSONAL_SSH_KEY: ${{ secrets.PERSONAL_SSH_KEY }}
