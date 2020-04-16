@@ -21,7 +21,10 @@ export GIT_TAG=$(git describe --tags | tr -d "v")
 printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
 printf "Directory - ${PWD} \n"
-printf "Actor - ${GITHUB_ACTOR} \n\n"
+printf "Actor - ${GITHUB_ACTOR} \n"
+printf "Git user email: \n"
+git config user.email
+printf "\n\n"
 
 asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
@@ -33,20 +36,21 @@ printf "\nNew SHA256: ${SHA256} \n"
 printf "\n**************************************************\n"
 
 homebrew_repo_name="sanderblue/homebrew-core"
-# upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
-
-# printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
-# printf "Cloning ${homebrew_repo_name}...\n"
-
-# # Clone homebrew-core fork
-# git clone $upstream_homebrew
+upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
+# printf "\nSetting ssh key...\n\n"
+# mkdir ~/.ssh
+# echo "${PERSONAL_SSH_KEY}" > ~/.ssh/id_rsa
+# chmod 600 ~/.ssh/id_rsa
+
 printf "\nGit remote: "
 git remote -v
-printf "\n\n"
+printf "Switching remote origin to use SSH...\n\n"
+
+git remote set-url origin $upstream_homebrew
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
@@ -77,12 +81,6 @@ rm $tmp_formula_file
 git --no-pager diff
 
 homebrew_release_branch="release/${GIT_TAG}"
-
-printf "\nSetting ssh key...\n\n"
-
-mkdir ~/.ssh
-echo "${PERSONAL_SSH_KEY}" > ~/.ssh/id_rsa
-chmod 600 ~/.ssh/id_rsa
 
 git config user.email
 
