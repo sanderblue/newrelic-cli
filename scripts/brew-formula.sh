@@ -24,6 +24,7 @@ asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_
 
 printf "\nAsset gzip: ${asset_file}"
 
+
 SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 
 printf "\nNew SHA256: ${SHA256} \n"
