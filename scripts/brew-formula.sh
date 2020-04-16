@@ -76,7 +76,7 @@ homebrew_release_branch="release/${GIT_TAG}"
 printf "\nSetting ssh key...\n\n"
 
 mkdir ~/.ssh
-echo "${PERSONAL_SSH_KEY}" > ~/.ssh/id_rsa
+echo "${{ secrets.PERSONAL_SSH_KEY }}" > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 
 git config user.email
