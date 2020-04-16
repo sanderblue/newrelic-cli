@@ -59,6 +59,7 @@ tmp_formula_file='Formula/newrelic-cli.rb.tmp'
 formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
 formula_sha256='  sha256 "'${SHA256}'"'
 
+
 # Make temporary copy of existing formula file
 cp $homebrew_formula_file $tmp_formula_file
 
