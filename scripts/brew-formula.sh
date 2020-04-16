@@ -59,7 +59,6 @@ git config --local user.name "Sander Blue"
 # git config user.password ${PAT}
 # echo "::set-env name=GIT_USER::${GITHUB_ACTOR}:${PAT}"
 
-
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'
 
