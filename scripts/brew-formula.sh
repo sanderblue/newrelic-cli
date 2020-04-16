@@ -73,11 +73,13 @@ git --no-pager diff
 
 homebrew_release_branch="release/${GIT_TAG}"
 
-printf "\nSetting remote origin...\n\n"
+printf "\nSetting ssh key...\n\n"
+
+mkdir ~/.ssh
+echo "${PERSONAL_SSH_KEY}" > ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa
 
 git config user.email
-
-git remote set-url origin https://x-access-token:${PAT}@github.com/${homebrew_repo_name}.git
 
 # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
 printf "\n Checkout...\n"
