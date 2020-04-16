@@ -27,13 +27,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout sanderblue/homebrew-core
+      - name: Checkout homebrew-core
         uses: actions/checkout@v2
         with:
           repository: sanderblue/homebrew-core
           path: homebrew-core
-          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          # token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create homebrew-core pull request
         shell: bash
         run: ./scripts/brew-formula.sh
+        env:
+          GH_USER_EMAIL: william.a.blue@gmail.com
+          GH_USERNAME: sanderblue

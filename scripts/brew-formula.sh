@@ -35,22 +35,13 @@ SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 printf "\nNew SHA256: ${SHA256} \n"
 printf "\n**************************************************\n"
 
-homebrew_repo_name="sanderblue/homebrew-core"
-upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
-
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-git_username="sanderblue"
-
-# git remote set-url origin "https://${git_username}:${PAT}@github.com/${homebrew_repo_name}"
-
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
-git config --local user.email "william.a.blue@gmail.com"
-git config --local user.name "Sander Blue"
-# git config user.password ${PAT}
-# echo "::set-env name=GIT_USER::${GITHUB_ACTOR}:${PAT}"
+git config --local user.email "${GH_USER_EMAIL}"
+# git config --local user.name "${GH_USER_NAME}"
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'
@@ -71,15 +62,9 @@ rm $tmp_formula_file
 # Display diff (without a pager so script can continue)
 git --no-pager diff
 
-printf "\n"
-git config -l
-printf "\n"
-
 # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
 homebrew_release_branch="release/${GIT_TAG}"
-printf "\n Checkout...\n"
 git checkout -b $homebrew_release_branch
-printf "\n git add...\n"
 git add Formula/newrelic-cli.rb
 git status
 git commit -m "newrelic-cli ${GIT_TAG}" # homebrew recommended commit message format
