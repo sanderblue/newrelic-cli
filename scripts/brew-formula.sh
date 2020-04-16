@@ -23,7 +23,7 @@ printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 printf "Directory - ${PWD} \n"
 printf "Actor - ${GITHUB_ACTOR} \n"
 printf "Git user email: \n"
-git config user.email
+git config -l || true
 printf "\n\n"
 
 asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
