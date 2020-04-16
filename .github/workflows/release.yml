@@ -32,5 +32,7 @@ jobs:
         with:
           repository: sanderblue/homebrew-core
           path: homebrew-core
+
+      - name: Create homebrew-core pull request
         shell: bash
         run: echo "Directory - ${PWD}"
