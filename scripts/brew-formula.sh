@@ -44,14 +44,12 @@ printf "\n**************************************************\n"
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-git config user.email
-
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
 git config user.email "william.a.blue@gmail.com"
 git config user.name "Sander Blue"
-git config user.password ${PERSONAL_ACCESS_TOKEN}
-echo "::set-env name=GIT_USER::sanderblue:${PERSONAL_ACCESS_TOKEN}"
+git config user.password ${PAT}
+echo "::set-env name=GIT_USER::${GITHUB_ACTOR}:${PAT}"
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'
