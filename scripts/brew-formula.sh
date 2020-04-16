@@ -41,10 +41,10 @@ printf "\n**************************************************\n"
 # printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
 # printf "Cloning ${homebrew_repo_name}...\n"
 
-# # Set git config to our GitHub "machine user" nr-developer-toolkit
-# # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
-# git config --global user.email "william.a.blue@gmail.com"
-# git config --global user.name "Sander Blue"
+# Set git config to our GitHub "machine user" nr-developer-toolkit
+# https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
+git config --global user.email "william.a.blue@gmail.com"
+git config --global user.name "Sander Blue"
 
 # # Clone homebrew-core fork
 # git clone $upstream_homebrew
