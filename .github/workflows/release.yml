@@ -21,14 +21,16 @@ jobs:
       - name: Checkout newrelic/newrelic-cli
         uses: actions/checkout@v2
 
-      - name: Checkout sanderblue/homebrew-core
-        uses: actions/checkout@v2
-        with:
-          repository: sanderblue/homebrew-core
-          path: homebrew-core
-
       - name: Publish Release
         shell: bash
         run: make release-publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout sanderblue/homebrew-core
+        uses: actions/checkout@v2
+        with:
+          repository: sanderblue/homebrew-core
+          path: homebrew-core
+        shell: bash
+        run: echo "Directory - ${PWD}"
