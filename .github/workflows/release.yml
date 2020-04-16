@@ -33,6 +33,11 @@ jobs:
           repository: sanderblue/homebrew-core
           path: homebrew-core
 
+      - name: SSH setup?
+        uses: webfactory/ssh-agent@v0.2.0
+          with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       # - name: Install SSH key
       #   uses: shimataro/ssh-key-action@v2
       #   with:
