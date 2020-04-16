@@ -41,21 +41,9 @@ upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-# printf "\nSetting ssh key...\n\n"
-# mkdir ~/.ssh
-# echo "${PERSONAL_SSH_KEY}" > ~/.ssh/id_rsa
-# chmod 600 ~/.ssh/id_rsa
-
-printf "\nGit remote: "
-git remote -v
-printf "Switching remote origin to use SSH...\n\n"
-
-# Set remote repo to SSH auth
-# git remote set-url origin $upstream_homebrew
-
 git_username="sanderblue"
 
-git remote set-url origin "https://${git_username}:${PAT}@github.com/${homebrew_repo_name}"
+# git remote set-url origin "https://${git_username}:${PAT}@github.com/${homebrew_repo_name}"
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
