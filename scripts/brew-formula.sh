@@ -32,7 +32,7 @@ SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
 printf "\nNew SHA256: ${SHA256} \n"
 printf "\n**************************************************\n"
 
-# homebrew_repo_name="sanderblue/homebrew-core"
+homebrew_repo_name="sanderblue/homebrew-core"
 # upstream_homebrew="git@github.com:${homebrew_repo_name}.git"
 
 # printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
@@ -46,8 +46,8 @@ cd homebrew-core
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
-git config user.email "william.a.blue@gmail.com"
-git config user.name "Sander Blue"
+git config --local user.email "william.a.blue@gmail.com"
+git config --local user.name "Sander Blue"
 # git config user.password ${PAT}
 # echo "::set-env name=GIT_USER::${GITHUB_ACTOR}:${PAT}"
 
@@ -73,9 +73,16 @@ git --no-pager diff
 
 homebrew_release_branch="release/${GIT_TAG}"
 
+printf "Setting remote origin..."
+
+git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/homebrew_repo_name.git
+
 # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
 git checkout -b $homebrew_release_branch
 git add Formula/newrelic-cli.rb
 git status
 git commit -m "newrelic-cli ${GIT_TAG}" # homebrew recommended commit message format
-git push origin $homebrew_release_branch
+
+printf "Pushing up new release branch: ${homebrew_release_branch}"
+
+git push
