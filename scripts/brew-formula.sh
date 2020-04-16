@@ -15,6 +15,9 @@ set -o errexit
 set -o pipefail
 
 printf "\n**************************************************\n"
+
+export GIT_TAG=$(git describe --tags | tr -d "v")
+
 printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
 printf "\n CURRENT DIRECTORY: ${PWD}"
