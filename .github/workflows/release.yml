@@ -40,4 +40,4 @@ jobs:
         run: ./scripts/brew-formula.sh
         env:
           GH_USER_EMAIL: william.a.blue@gmail.com
-          GH_USERNAME: sanderblue
+          GH_USER_NAME: 'Sander Blue'

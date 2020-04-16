@@ -40,8 +40,8 @@ cd homebrew-core
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
-git config --local user.email "${GH_USER_EMAIL}"
-git config --local user.name "${GH_USER_NAME}"
+git config user.email $GH_USER_EMAIL
+git config user.name $GH_USER_NAME
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'
