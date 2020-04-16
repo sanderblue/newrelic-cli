@@ -17,6 +17,8 @@ set -o pipefail
 printf "\n**************************************************\n"
 printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
+printf "\n CURRENT DIRECTORY: ${PWD}"
+
 asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
 
