@@ -41,8 +41,6 @@ printf "\n**************************************************\n"
 # # Clone homebrew-core fork
 # git clone $upstream_homebrew
 
-ls -la
-
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
@@ -50,8 +48,8 @@ cd homebrew-core
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
 git config user.email "william.a.blue@gmail.com"
 git config user.name "Sander Blue"
-git config user.password ${PAT}
-echo "::set-env name=GIT_USER::${GITHUB_ACTOR}:${PAT}"
+# git config user.password ${PAT}
+# echo "::set-env name=GIT_USER::${GITHUB_ACTOR}:${PAT}"
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'
