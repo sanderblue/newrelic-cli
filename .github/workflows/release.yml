@@ -18,8 +18,14 @@ jobs:
         run: echo "::add-path::$(go env GOPATH)/bin"
         shell: bash
 
-      - name: Checkout code
+      - name: Checkout newrelic/newrelic-cli
         uses: actions/checkout@v2
+
+      - name: Checkout sanderblue/homebrew-core
+        uses: actions/checkout@v2
+        with:
+          repository: sanderblue/homebrew-core
+          path: homebrew-core
 
       - name: Publish Release
         shell: bash
