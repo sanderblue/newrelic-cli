@@ -51,6 +51,8 @@ printf "Git User email: $email"
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
 git config user.email "william.a.blue@gmail.com"
 git config user.name "Sander Blue"
+git config user.password ${PERSONAL_ACCESS_TOKEN}
+echo "::set-env name=GIT_USER::sanderblue:${PERSONAL_ACCESS_TOKEN}"
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'

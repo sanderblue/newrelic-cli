@@ -36,3 +36,5 @@ jobs:
       - name: Create homebrew-core pull request
         shell: bash
         run: ./scripts/brew-formula.sh
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
