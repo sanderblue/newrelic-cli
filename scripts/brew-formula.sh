@@ -73,16 +73,18 @@ git --no-pager diff
 
 homebrew_release_branch="release/${GIT_TAG}"
 
-printf "Setting remote origin..."
+printf "\nSetting remote origin...\n\n"
 
 git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/homebrew_repo_name.git
 
 # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
+printf "\n Checkout...\n"
 git checkout -b $homebrew_release_branch
+printf "\n git add...\n"
 git add Formula/newrelic-cli.rb
 git status
 git commit -m "newrelic-cli ${GIT_TAG}" # homebrew recommended commit message format
 
 printf "Pushing up new release branch: ${homebrew_release_branch}"
 
-git push
+git push --set-upstream origin $homebrew_release_branch
