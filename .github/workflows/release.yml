@@ -24,3 +24,5 @@ jobs:
       - name: Publish Release
         shell: bash
         run: make release-publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
