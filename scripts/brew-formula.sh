@@ -41,16 +41,16 @@ printf "\n**************************************************\n"
 # printf "\nPreparing pull request to ${homebrew_repo_name}... \n"
 # printf "Cloning ${homebrew_repo_name}...\n"
 
-# Set git config to our GitHub "machine user" nr-developer-toolkit
-# https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
-git config --global user.email "william.a.blue@gmail.com"
-git config --global user.name "Sander Blue"
-
 # # Clone homebrew-core fork
 # git clone $upstream_homebrew
 
 # Change to local homebrew-core and output updates
 cd homebrew-core
+
+# Set git config to our GitHub "machine user" nr-developer-toolkit
+# https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
+git config user.email "william.a.blue@gmail.com"
+git config user.name "Sander Blue"
 
 homebrew_formula_file='Formula/newrelic-cli.rb'
 tmp_formula_file='Formula/newrelic-cli.rb.tmp'
@@ -58,7 +58,6 @@ tmp_formula_file='Formula/newrelic-cli.rb.tmp'
 # Set variables for lines to replace in the formula (lines 4 and 5)
 formula_url='  url "https:\/\/github.com\/newrelic\/newrelic-cli\/archive\/v'${GIT_TAG}'.tar.gz"'
 formula_sha256='  sha256 "'${SHA256}'"'
-
 
 # Make temporary copy of existing formula file
 cp $homebrew_formula_file $tmp_formula_file
