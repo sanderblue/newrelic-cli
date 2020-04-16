@@ -19,6 +19,7 @@ printf "Generating Homebrew formula for git tag: ${GIT_TAG} \n"
 
 asset_file=$(find ${PWD}/dist -type f -name "newrelic-cli_${GIT_TAG}_Darwin_x86_64*")
 
+
 printf "\nAsset gzip: ${asset_file}"
 
 SHA256="$(openssl sha256 < $asset_file | sed 's/(stdin)= //')"
