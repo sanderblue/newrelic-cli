@@ -44,8 +44,7 @@ printf "\n**************************************************\n"
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
-email=$(git config user.email)
-printf "Git User email: $email"
+git config user.email
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
