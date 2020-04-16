@@ -41,6 +41,8 @@ printf "\n**************************************************\n"
 # # Clone homebrew-core fork
 # git clone $upstream_homebrew
 
+ls -la
+
 # Change to local homebrew-core and output updates
 cd homebrew-core
 
