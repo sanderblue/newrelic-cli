@@ -55,7 +55,7 @@ printf "Switching remote origin to use SSH...\n\n"
 
 git_username="sanderblue"
 
-git remote set-url origin "https://${git_username}:${GITHUB_TOKEN}@github.com/${homebrew_repo_name}"
+git remote set-url origin "https://${git_username}:${PAT}@github.com/${homebrew_repo_name}"
 
 # Set git config to our GitHub "machine user" nr-developer-toolkit
 # https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users
