@@ -21,8 +21,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Publish Release
-        shell: bash
-        run: make release-publish
+      - name: GoReleaser
+        uses: goreleaser/goreleaser-action@v1
+        with:
+          version: latest
+          args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish Release
+      #   shell: bash
+      #   run: make release-publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
