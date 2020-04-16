@@ -53,7 +53,7 @@ printf "Switching remote origin to use SSH...\n\n"
 # Set remote repo to SSH auth
 # git remote set-url origin $upstream_homebrew
 
-$git_username="sanderblue"
+git_username="sanderblue"
 
 git remote set-url origin "https://${git_username}:${GITHUB_TOKEN}@github.com/${homebrew_repo_name}"
 
