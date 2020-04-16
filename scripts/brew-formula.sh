@@ -75,6 +75,8 @@ homebrew_release_branch="release/${GIT_TAG}"
 
 printf "\nSetting remote origin...\n\n"
 
+git config user.email
+
 git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${homebrew_repo_name}.git
 
 # Create new branch, commit updates, push new release branch to newrelic-forks/homebrew-core
