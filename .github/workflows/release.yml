@@ -35,4 +35,4 @@ jobs:
 
       - name: Create homebrew-core pull request
         shell: bash
-        run: echo "Directory - ${PWD}"
+        run: ./scripts/brew-formula.sh

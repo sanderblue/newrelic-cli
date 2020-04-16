@@ -1,5 +1,4 @@
 RELEASE_SCRIPT ?= ./scripts/release.sh
-HOMEBREW_FORMULA_SCRIPT ?= ./scripts/brew-formula.sh
 
 GOTOOLS += github.com/goreleaser/goreleaser
 
@@ -22,7 +21,6 @@ release-clean:
 release-publish: clean tools
 	@echo "=== $(PROJECT_NAME) === [ release-publish  ]: Publishing release via $(REL_CMD)"
 	$(REL_CMD)
-	$(HOMEBREW_FORMULA_SCRIPT)
 
 # Local Snapshot
 snapshot: release-clean
