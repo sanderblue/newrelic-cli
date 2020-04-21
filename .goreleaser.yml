@@ -66,6 +66,7 @@ archives:
 changelog:
   skip: true
 
+
 scoop:
   bucket:
     owner: sanderblue
