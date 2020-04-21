@@ -72,7 +72,7 @@ scoop:
     name: newrelic-cli
   commit_author:
     name: sanderblue
-    email: william.a.blue@gmail.com
+    email: "{{ .Env.COMMIT_AUTHOR_EMAIL }}"
   url_template: "https://github.com/sanderblue/newrelic-cli/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
   homepage: https://github.com/sanderblue/newrelic-cli
   description: |
