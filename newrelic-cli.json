@@ -1,12 +1,12 @@
 {
-    "version": "0.6.149",
+    "version": "0.6.150",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/sanderblue/newrelic-cli/releases/download/v0.6.149/newrelic-cli_0.6.149_Windows_x86_64.zip",
+            "url": "https://github.com/sanderblue/newrelic-cli/releases/download/v0.6.150/newrelic-cli_0.6.150_Windows_x86_64.zip",
             "bin": [
                 "newrelic.exe"
             ],
-            "hash": "267e9bb1c05ac71ebed3fefcd0b5fd4a29c5d09c8f14c0ea2f8a313672c1b9d8"
+            "hash": "05114468c8393865dc9811609d5ee0a4d8bcd9c8b2ba649c0df191728cc7cef3"
         }
     },
     "homepage": "https://github.com/sanderblue/newrelic-cli",
