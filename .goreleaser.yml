@@ -65,3 +65,17 @@ archives:
 # Already using git-chglog
 changelog:
   skip: true
+
+scoop:
+  bucket:
+    owner: sanderblue
+    name: newrelic-cli
+  commit_author:
+    name: sanderblue
+    email: william.a.blue@gmail.com
+  url_template: "https://github.com/sanderblue/newrelic-cli/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+  homepage: https://github.com/sanderblue/newrelic-cli
+  description: |
+    The New Relic CLI is an officially supported command line interface for New
+    Relic, released as part of the Developer Toolkit.
+  license: Apache-2.0
